@@ -1,0 +1,4 @@
+{
+  "dbUri": "mongodb://peterwu:123456789p@ds135757.mlab.com:35757/flashcard",
+  "jwtSecret": "asupersecretphasethatnoonecanguess!!"
+}
