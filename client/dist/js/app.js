@@ -43613,6 +43613,8 @@ exports.withOptions = withOptions;
 
 var _react = __webpack_require__(0);
 
+var _react2 = _interopRequireDefault(_react);
+
 var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -43627,17 +43629,12 @@ var _warning2 = _interopRequireDefault(_warning);
 
 var _supports = __webpack_require__(287);
 
-var supports = _interopRequireWildcard(_supports);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var defaultEventOptions = {
   capture: false,
   passive: false
 };
-/* eslint-disable prefer-spread */
 
 function mergeDefaultEventOptions(options) {
   return (0, _assign2.default)({}, defaultEventOptions, options);
@@ -43645,28 +43642,18 @@ function mergeDefaultEventOptions(options) {
 
 function getEventListenerArgs(eventName, callback, options) {
   var args = [eventName, callback];
-  args.push(supports.passiveOption ? options : options.capture);
+  args.push(_supports.passiveOption ? options : options.capture);
   return args;
 }
 
 function on(target, eventName, callback, options) {
-  if (supports.addEventListener) {
-    target.addEventListener.apply(target, getEventListenerArgs(eventName, callback, options));
-  } else if (supports.attachEvent) {
-    // IE8+ Support
-    target.attachEvent('on' + eventName, function () {
-      callback.call(target);
-    });
-  }
+  // eslint-disable-next-line prefer-spread
+  target.addEventListener.apply(target, getEventListenerArgs(eventName, callback, options));
 }
 
 function off(target, eventName, callback, options) {
-  if (supports.removeEventListener) {
-    target.removeEventListener.apply(target, getEventListenerArgs(eventName, callback, options));
-  } else if (supports.detachEvent) {
-    // IE8+ Support
-    target.detachEvent('on' + eventName, callback);
-  }
+  // eslint-disable-next-line prefer-spread
+  target.removeEventListener.apply(target, getEventListenerArgs(eventName, callback, options));
 }
 
 function forEachListener(props, iteratee) {
@@ -43702,7 +43689,7 @@ function forEachListener(props, iteratee) {
 }
 
 function withOptions(handler, options) {
-  process.env.NODE_ENV !== "production" ? (0, _warning2.default)(options, 'react-event-listener: Should be specified options in withOptions.') : void 0;
+  process.env.NODE_ENV !== "production" ? (0, _warning2.default)(options, 'react-event-listener: should be specified options in withOptions.') : void 0;
 
   return {
     handler: handler,
@@ -43710,8 +43697,8 @@ function withOptions(handler, options) {
   };
 }
 
-var EventListener = function (_Component) {
-  (0, _inherits3.default)(EventListener, _Component);
+var EventListener = function (_React$Component) {
+  (0, _inherits3.default)(EventListener, _React$Component);
 
   function EventListener() {
     (0, _classCallCheck3.default)(this, EventListener);
@@ -43776,18 +43763,19 @@ var EventListener = function (_Component) {
     }
   }]);
   return EventListener;
-}(_react.Component);
+}(_react2.default.Component);
 
 EventListener.propTypes = process.env.NODE_ENV !== "production" ? {
   /**
    * You can provide a single child too.
    */
-  children: _propTypes2.default.element,
+  children: _propTypes2.default.node,
   /**
    * The DOM target to listen to.
    */
   target: _propTypes2.default.oneOfType([_propTypes2.default.object, _propTypes2.default.string]).isRequired
 } : {};
+
 exports.default = EventListener;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
@@ -43801,7 +43789,7 @@ exports.default = EventListener;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.passiveOption = exports.detachEvent = exports.attachEvent = exports.removeEventListener = exports.addEventListener = undefined;
+exports.passiveOption = undefined;
 
 var _defineProperty = __webpack_require__(101);
 
@@ -43809,19 +43797,9 @@ var _defineProperty2 = _interopRequireDefault(_defineProperty);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function defineProperty(o, p, attr) {
-  return (0, _defineProperty2.default)(o, p, attr);
+function defineProperty(object, property, attr) {
+  return (0, _defineProperty2.default)(object, property, attr);
 }
-
-// Inspired by https://github.com/facebook/fbjs/blob/master/packages/fbjs/src/core/ExecutionEnvironment.js
-var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-
-var addEventListener = exports.addEventListener = canUseDOM && 'addEventListener' in window;
-var removeEventListener = exports.removeEventListener = canUseDOM && 'removeEventListener' in window;
-
-// IE8+ Support
-var attachEvent = exports.attachEvent = canUseDOM && 'attachEvent' in window;
-var detachEvent = exports.detachEvent = canUseDOM && 'detachEvent' in window;
 
 // Passive options
 // Inspired by https://github.com/Modernizr/Modernizr/blob/master/feature-detects/dom/passiveeventlisteners.js
@@ -43841,13 +43819,17 @@ var passiveOption = exports.passiveOption = function () {
           supportsPassiveOption = true;
         }
       }));
-    } catch (e) {} // eslint-disable-line no-empty
+    } catch (err) {
+      //
+    }
 
     cache = supportsPassiveOption;
 
     return supportsPassiveOption;
   }();
 }();
+
+exports.default = {};
 
 /***/ }),
 /* 288 */
