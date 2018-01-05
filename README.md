@@ -6,7 +6,7 @@ Study Cubby is a productivity application that allows users to add, edit, and de
 
 ![login](https://user-images.githubusercontent.com/31169025/34599507-8dea1b9e-f1a7-11e7-9786-7994aa711833.png)
 
-![home](https://user-images.githubusercontent.com/31169025/34599523-a75ad226-f1a7-11e7-9a51-6fa8ae4156f4.png)
+![home](https://user-images.githubusercontent.com/31169025/34599654-5f550d10-f1a8-11e7-97dd-a05bee9c365b.png)
 
 ## Built With
 
